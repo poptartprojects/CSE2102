@@ -1,7 +1,7 @@
 .metadata
 .recommenders
 RemoteSystemsTempFiles/
-.settings/
-bin/
-.classpath
-.project
+CSE2102-DesignProject/.settings/
+CSE2102-DesignProject/bin/
+CSE2102-DesignProject/.classpath
+CSE2102-DesignProject/.project
