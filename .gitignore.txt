@@ -1,5 +1,5 @@
-.metadata
-.recommenders
+.metadata/
+.recommenders/
 RemoteSystemsTempFiles/
 CSE2102-DesignProject/.settings/
 CSE2102-DesignProject/bin/
