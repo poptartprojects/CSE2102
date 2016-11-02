@@ -24,7 +24,6 @@ public class Database {
 			while((sCurrentLine = br.readLine()) != null){
 				//System.out.println(sCurrentLine);
 				traderJoes.add(sCurrentLine);
-				//https://maps.googleapis.com/map/api/geocode/json?sCurrentLine;
 			}
 
 		}

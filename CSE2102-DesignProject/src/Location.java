@@ -1,7 +1,7 @@
 
 public class Location {
 
-	int zipCode;
+	String zipCode;
 	String name;
 	String address;
 	public static void main(String[] args) {
@@ -17,7 +17,7 @@ public class Location {
 		return name;
 	}
 
-	public int getZipCode()
+	public String getZipCode()
 	{
 		return zipCode;
 	}
@@ -29,9 +29,9 @@ public class Location {
 	{
 		name = newName;
 	}
-	public void setZipCode(int zip)
+	public void setZipCode(String zip)
 	{
-		int length = String.valueOf(zip).length();
+		int length = zip.length();
 		if(length == 5){
 			zipCode = zip;
 		}
