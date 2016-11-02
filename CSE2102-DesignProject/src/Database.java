@@ -7,6 +7,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.BufferedReader;
 
+import com.google.maps.errors.ApiException;
+import com.google.maps.internal.ApiResponse;
+import com.google.maps.model.GeocodingResult;
+import com.google.maps.model.LatLng;
 
 public class Database {
 
