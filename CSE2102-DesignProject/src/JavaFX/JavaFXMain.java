@@ -10,7 +10,6 @@ import javafx.scene.control.*;
 import javafx.scene.text.*;
 import javafx.scene.*;
 import javafx.scene.paint.*;
-import javafx.scene.effect.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.TextField;
 
@@ -103,4 +102,4 @@ public class JavaFXMain extends Application {
 
 	public static void main(String[] args) {
 		launch(args);
-	}}
+}}
