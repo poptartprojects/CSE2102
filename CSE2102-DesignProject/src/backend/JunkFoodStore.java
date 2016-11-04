@@ -1,9 +1,9 @@
+package backend;
 
-public class User extends Location {
+public class JunkFoodStore extends Location {
 	Double latitude;
 	Double longitude;
 	public static void main(String[] args) {
-		
 	}
 	public Double getLatitude()
 	{
@@ -13,12 +13,13 @@ public class User extends Location {
 	{
 		return longitude;
 	}
-	public void setLatitude(Double lat)
-	{
+	public void setLatitude(Double lat){
 		latitude = lat;
 	}
-	public void setLongitude(Double longi)
-	{
-		longitude = longi;
+	public void setLongitude(Double lon){
+		longitude = lon;
 	}
+
+
+
 }

@@ -1,3 +1,4 @@
+package backend;
 
 public class HealthFoodStore extends Location {
 

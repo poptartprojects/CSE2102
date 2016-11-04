@@ -1,18 +1,13 @@
+package backend;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.BufferedReader;
-
-import com.google.maps.errors.ApiException;
-import com.google.maps.internal.ApiResponse;
-import com.google.maps.model.GeocodingResult;
-import com.google.maps.model.LatLng;
+import com.google.maps.model.PlacesSearchResponse;
 
 public class Database {
 
 	public static void main(String[] args) {
 		//going to create a cache of locations
+		/*
 		List<String> traderJoes = new ArrayList<String>();
 		BufferedReader br = null;
 		try{
@@ -59,6 +54,27 @@ public class Database {
 		}
 		System.out.println(traderJoes);
 		System.out.println(wholeFoods);
+	}
+	*/
+	}
+	List<Search> history = new ArrayList<Search>();
+	public PlacesSearchResponse showMe(Search info)
+	{
+		PlacesSearchResponse response = new PlacesSearchResponse();
+		String infoString = info.getInput();
+		for(int i = 0; i < history.size(); i++)
+		{
+			if(history.get(i).getInput().equals(infoString))
+			{
+				response = history.get(i).getResults();
+				System.out.println("DATABASE");
+				return response;
+			}
+		}
+		info.setResults(APIUse.Run(infoString));
+		history.add(info);
+		System.out.println("API USED");
+		return info.getResults();
 	}
 }
 
