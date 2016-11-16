@@ -6,7 +6,7 @@ public class Search {
 	private String input;
 	private PlacesSearchResponse results;
 	private boolean McD, BK, W, PH, TJ, WF = false;
-	private String stores;
+	private String stores = "";
 	private void setStores(){
 		if(McD){
 			stores +=" McDonald's";
