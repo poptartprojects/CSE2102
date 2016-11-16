@@ -2,6 +2,7 @@ package backend;
 import java.util.ArrayList;
 import java.util.List;
 import com.google.maps.model.PlacesSearchResponse;
+import com.google.maps.model.PlacesSearchResult;
 
 public class Database {
 
@@ -71,9 +72,12 @@ public class Database {
 				return response;
 			}
 		}
-		info.setResults(APIUse.Run(infoString));
+		info.setResults(APIUse.Run(info));
 		history.add(info);
 		System.out.println("API USED");
+		for(PlacesSearchResult result: info.getResults().results){
+			System.out.println(result.formattedAddress);
+		}
 		return info.getResults();
 	}
 }
