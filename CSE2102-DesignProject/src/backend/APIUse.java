@@ -43,14 +43,22 @@ public class APIUse {
 			for(int i = 0; i < response.results.length; i++){
 				results[20*page + i] = response.results[i];
 			}
-			/*while(response.nextPageToken != null){
+			if(response.nextPageToken != null){
 				TextSearchRequest attempt2 = PlacesApi.textSearchNextPage(context2, response.nextPageToken); 
 				page++;
 				response = attempt2.await();
 				for(int i = 0; i < response.results.length; i++){
 					results[20*page + i] = response.results[i];
 				}
-			}*/
+			}
+			if(response.nextPageToken != null){
+				TextSearchRequest attempt3 = PlacesApi.textSearchNextPage(context2, response.nextPageToken); 
+				page++;
+				response = attempt3.await();
+				for(int i = 0; i < response.results.length; i++){
+					results[20*page + i] = response.results[i];
+				}
+			}
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
