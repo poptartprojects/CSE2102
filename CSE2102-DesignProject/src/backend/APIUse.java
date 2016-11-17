@@ -1,4 +1,6 @@
 package backend;
+import java.util.concurrent.TimeUnit;
+
 import com.google.maps.GeoApiContext;
 import com.google.maps.GeocodingApi;
 import com.google.maps.PlacesApi;
@@ -46,6 +48,7 @@ public class APIUse {
 			if(response.nextPageToken != null){
 				TextSearchRequest attempt2 = PlacesApi.textSearchNextPage(context2, response.nextPageToken); 
 				page++;
+				TimeUnit.SECONDS.sleep(2); //Google needs us to wait 2 seconds before we can find the next page
 				response = attempt2.await();
 				for(int i = 0; i < response.results.length; i++){
 					results[20*page + i] = response.results[i];
@@ -54,6 +57,7 @@ public class APIUse {
 			if(response.nextPageToken != null){
 				TextSearchRequest attempt3 = PlacesApi.textSearchNextPage(context2, response.nextPageToken); 
 				page++;
+				TimeUnit.SECONDS.sleep(2); //Google needs us to wait 2 seconds before we can find the next page
 				response = attempt3.await();
 				for(int i = 0; i < response.results.length; i++){
 					results[20*page + i] = response.results[i];

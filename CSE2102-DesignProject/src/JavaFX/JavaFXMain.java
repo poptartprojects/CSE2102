@@ -99,7 +99,7 @@ public class JavaFXMain extends Application {
 					}
 					searcher.showMe();
 					//add if statement is results are all empty
-					if(searcher.getResults().length == 0)
+					if(searcher.getResults()[0] == null)
 						error.setText("There were no results. Did you put in a proper ZIP code or address?");
 					else{
 						for(int i = 0; i < searcher.getResults().length; i++/*PlacesSearchResult result : searcher.getResults().results*/){
