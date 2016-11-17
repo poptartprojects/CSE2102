@@ -1,10 +1,10 @@
 package backend;
-import com.google.maps.model.PlacesSearchResponse;
+import com.google.maps.model.PlacesSearchResult;
 
 public class Search {
 
 	private String input;
-	private PlacesSearchResponse results;
+	private PlacesSearchResult[] results = new PlacesSearchResult[60];
 	private boolean McD, BK, W, PH, TJ, WF = false;
 	private String stores = "";
 	private void setStores(){
@@ -28,7 +28,7 @@ public class Search {
 		}
 	}
 
-	public PlacesSearchResponse showMe(){
+	public PlacesSearchResult[] showMe(){
 		this.setStores();
 		this.setResults(APIUse.Run(this));
 		return this.getResults();
@@ -42,10 +42,10 @@ public class Search {
 	public void setInput(String input) {
 		this.input = input;
 	}
-	public PlacesSearchResponse getResults() {
+	public PlacesSearchResult[] getResults() {
 		return results;
 	}
-	public void setResults(PlacesSearchResponse results) {
+	public void setResults(PlacesSearchResult[] results) {
 		this.results = results;
 	}
 	public void setMcD(boolean value){

@@ -1,7 +1,5 @@
 package JavaFX;
 
-import com.google.maps.model.PlacesSearchResult;
-
 import backend.Search;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -101,13 +99,19 @@ public class JavaFXMain extends Application {
 					}
 					searcher.showMe();
 					//add if statement is results are all empty
-					if(searcher.getResults().results.length == 0)
+					if(searcher.getResults().length == 0)
 						error.setText("There were no results. Did you put in a proper ZIP code or address?");
 					else{
-						for(int i = 0; i < searcher.getResults().results.length; i++/*PlacesSearchResult result : searcher.getResults().results*/){
-							Text t = new Text(10, 50, searcher.getResults().results[i].name);
-							t.setFont(new Font(20));
-							outGrid2.add(t, 0, i);
+						for(int i = 0; i < searcher.getResults().length; i++/*PlacesSearchResult result : searcher.getResults().results*/){
+							if(searcher.getResults()[i] != null){
+								GridPane tgrid = new GridPane();
+								Text b = new Text(searcher.getResults()[i].name);
+								Text t = new Text(10, 50, searcher.getResults()[i].formattedAddress);
+								t.setFont(new Font(20));
+								tgrid.add(b, 0, 0);
+								tgrid.add(t, 1, 0);
+								outGrid2.add(tgrid, 0, i);
+							}
 						}
 						primaryStage.setScene(output);
 					}
@@ -124,6 +128,7 @@ public class JavaFXMain extends Application {
 			@Override
 			public void handle(ActionEvent e) {
 				primaryStage.setScene(input);
+				outGrid2.getChildren().clear();
 			}
 		});
 		outputGrid.add(back, 0, 0);

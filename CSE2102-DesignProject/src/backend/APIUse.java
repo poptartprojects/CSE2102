@@ -1,13 +1,14 @@
 package backend;
 import com.google.maps.GeoApiContext;
 import com.google.maps.GeocodingApi;
-import com.google.maps.NearbySearchRequest;
 import com.google.maps.PlacesApi;
+import com.google.maps.TextSearchRequest;
 import com.google.maps.model.GeocodingResult;
 import com.google.maps.model.PlacesSearchResponse;
+import com.google.maps.model.PlacesSearchResult;
 
 public class APIUse {
-	public static PlacesSearchResponse Run(Search search){
+	public static PlacesSearchResult[] Run(Search search){
 		//Set api keys
 		final String GEOCODING_API_KEY =  "AIzaSyD6ietwqG-woi90kQFzPViniL_iJ4RtCbs";
 		final String PLACES_API_KEY = "AIzaSyB2HVM_57qllCnn8wV8VLcPh4zKgsebtz0";
@@ -27,15 +28,29 @@ public class APIUse {
 			e.printStackTrace();
 		}
 
-		//Getting the stores within a radius 		
-		PlacesSearchResponse results = null;
+		//Getting the stores within a radius 
+		PlacesSearchResult[] results = new PlacesSearchResult[60]; //Google will only give us 60 results
+		PlacesSearchResponse response = null;
 		try{
 			//Look at other SearchQueries and figure out how to customize them. 
-			NearbySearchRequest attempt = PlacesApi.nearbySearchQuery(context2, coded[0].geometry.location);
+			TextSearchRequest attempt = PlacesApi.textSearchQuery(context2, search.getStores());
 			//here is where we configure the NearbySearchRequest
-			attempt.name(search.getStores());
-			attempt.radius(40234); //25 miles
-			results = attempt.await();
+			attempt.location(coded[0].geometry.location);
+			//attempt.name(search.getStores());
+			attempt.radius(40234); //25 miles supposedly = 40234 Google returns data further away
+			response = attempt.await();
+			int page = 0;
+			for(int i = 0; i < response.results.length; i++){
+				results[20*page + i] = response.results[i];
+			}
+			/*while(response.nextPageToken != null){
+				TextSearchRequest attempt2 = PlacesApi.textSearchNextPage(context2, response.nextPageToken); 
+				page++;
+				response = attempt2.await();
+				for(int i = 0; i < response.results.length; i++){
+					results[20*page + i] = response.results[i];
+				}
+			}*/
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
