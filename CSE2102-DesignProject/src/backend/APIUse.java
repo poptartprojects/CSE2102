@@ -34,7 +34,6 @@ public class APIUse {
 		PlacesSearchResult[] results = new PlacesSearchResult[60]; //Google will only give us 60 results
 		PlacesSearchResponse response = null;
 		try{
-			//Look at other SearchQueries and figure out how to customize them. 
 			TextSearchRequest attempt = PlacesApi.textSearchQuery(context2, search.getStores());
 			//here is where we configure the NearbySearchRequest
 			attempt.location(coded[0].geometry.location);

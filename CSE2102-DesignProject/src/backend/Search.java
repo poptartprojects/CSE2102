@@ -69,4 +69,23 @@ public class Search {
 	public String getStores(){
 		return stores;
 	}
+	
+	public boolean equals(Search otherSearch){
+		if(this.input.equals(otherSearch.getInput())){
+			if(this.McD = otherSearch.McD){
+				if(this.BK = otherSearch.BK){
+					if(this.W = otherSearch.W){
+						if(this.PH = otherSearch.PH){
+							if(this.TJ = otherSearch.TJ){
+								if(this.WF = otherSearch.WF){
+									return true;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		return false;
+	}
 }

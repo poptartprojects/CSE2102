@@ -1,5 +1,6 @@
 package JavaFX;
 
+import backend.Database;
 import backend.Search;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -13,13 +14,16 @@ import javafx.scene.*;
 import javafx.scene.paint.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 
 public class JavaFXMain extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
-
+		//Setting up the database
+		Database datey = new Database();
 		//Defining the input screen
 		GridPane griddy = new GridPane();
 		griddy.setAlignment(Pos.TOP_CENTER);
@@ -70,6 +74,16 @@ public class JavaFXMain extends Application {
 
 		griddy.add(grid2, 0, 4);
 
+		//Loading image assets
+		Image McDLogo, BKLogo, WLogo, PHLogo, TJLogo, WFLogo, UnknownLogo;
+		McDLogo = new Image("/Logos/McD.png");
+		BKLogo = new Image("/Logos/BK.png");
+		WLogo = new Image("/Logos/W.png");
+		PHLogo = new Image("/Logos/PH.png");
+		TJLogo = new Image("/Logos/TJ.png");
+		WFLogo = new Image("/Logos/WF.png");
+		UnknownLogo = new Image("/Logos/Unknown.png");
+		
 		//Go Button
 		Button go = new Button("Go!");
 		go.setOnAction(new EventHandler<ActionEvent>(){
@@ -97,19 +111,70 @@ public class JavaFXMain extends Application {
 					}else{
 						searcher.setInput(UGeo);
 					}
-					searcher.showMe();
+
+
+					//Searching
+					boolean inDatabase = false;
+					for(Search s : datey.getHistory()){
+						if(searcher.equals(s)){
+							inDatabase = true;
+							searcher.setResults(s.getResults());
+							break;
+						}
+					}
+					if(!inDatabase){	
+						searcher.showMe();
+					}
 					//add if statement is results are all empty
 					if(searcher.getResults()[0] == null)
 						error.setText("There were no results. Did you put in a proper ZIP code or address?");
 					else{
 						for(int i = 0; i < searcher.getResults().length; i++/*PlacesSearchResult result : searcher.getResults().results*/){
 							if(searcher.getResults()[i] != null){
+								String storeName = searcher.getResults()[i].name; 
 								GridPane tgrid = new GridPane();
-								Text b = new Text(searcher.getResults()[i].name);
+								ImageView l;
+								Text hours;
+								Text fee;
+								if(storeName.equals("McDonald's")){
+									l = new ImageView(McDLogo);
+									hours = new Text("24/7");
+									fee = new Text("-");
+								}else if(storeName.equals("Burger King")){
+									l = new ImageView(BKLogo);
+									hours = new Text("24/7");
+									fee = new Text("-");
+								}else if(storeName.equals("Wendy's")){
+									l = new ImageView(WLogo);
+									hours = new Text("6am - midnight");
+									fee = new Text("-");
+								}else if(storeName.equals("Pizza Hut")){
+									l = new ImageView(PHLogo);
+									hours = new Text("8am - 11pm");
+									fee = new Text("-");
+								}else if(storeName.equals("Trader Joe's")){
+									l = new ImageView(TJLogo);
+									hours = new Text("7am - 10pm");
+									fee = new Text("$8/month");
+								}else if(storeName.contains("Whole Foods")){
+									l = new ImageView(WFLogo);
+									hours = new Text("7am - 11pm");
+									fee = new Text("$10/month");
+								}else{
+									l = new ImageView(UnknownLogo);
+									hours = new Text("N/A");
+									fee = new Text("N/A");
+								}
+								l.setPreserveRatio(true);
+								l.setFitHeight(50);
+								//Text b = new Text(storeName);
 								Text t = new Text(10, 50, searcher.getResults()[i].formattedAddress);
 								t.setFont(new Font(20));
-								tgrid.add(b, 0, 0);
-								tgrid.add(t, 1, 0);
+								tgrid.add(l, 0, 0);
+								//tgrid.add(b, 1, 0);
+								tgrid.add(t, 2, 0);
+								tgrid.add(hours, 3, 0);
+								tgrid.add(fee, 4, 0);
 								outGrid2.add(tgrid, 0, i);
 							}
 						}

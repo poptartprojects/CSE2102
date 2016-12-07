@@ -1,7 +1,6 @@
 package backend;
 import java.util.ArrayList;
 import java.util.List;
-import com.google.maps.model.PlacesSearchResponse;
 import com.google.maps.model.PlacesSearchResult;
 
 public class Database {
@@ -59,9 +58,9 @@ public class Database {
 	*/
 	}
 	List<Search> history = new ArrayList<Search>();
-	public PlacesSearchResponse showMe(Search info)
+	public PlacesSearchResult[] showMe(Search info)
 	{
-		PlacesSearchResponse response = new PlacesSearchResponse();
+		PlacesSearchResult[] response = new PlacesSearchResult[60];
 		String infoString = info.getInput();
 		for(int i = 0; i < history.size(); i++)
 		{
@@ -75,10 +74,13 @@ public class Database {
 		info.setResults(APIUse.Run(info));
 		history.add(info);
 		System.out.println("API USED");
-		for(PlacesSearchResult result: info.getResults().results){
+		for(PlacesSearchResult result: info.getResults()){
 			System.out.println(result.formattedAddress);
 		}
 		return info.getResults();
+	}
+	public List<Search> getHistory(){
+		return this.history;
 	}
 }
 
