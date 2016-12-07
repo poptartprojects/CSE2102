@@ -58,7 +58,7 @@ public class Database {
 	*/
 	}
 	List<Search> history = new ArrayList<Search>();
-	public PlacesSearchResult[] showMe(Search info)
+	/*public PlacesSearchResult[] showMe(Search info)
 	{
 		PlacesSearchResult[] response = new PlacesSearchResult[60];
 		String infoString = info.getInput();
@@ -78,7 +78,7 @@ public class Database {
 			System.out.println(result.formattedAddress);
 		}
 		return info.getResults();
-	}
+	}*/
 	public List<Search> getHistory(){
 		return this.history;
 	}

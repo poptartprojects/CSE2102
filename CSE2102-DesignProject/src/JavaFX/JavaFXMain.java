@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.text.*;
 import javafx.scene.*;
 import javafx.scene.paint.*;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -34,11 +35,14 @@ public class JavaFXMain extends Application {
 
 		//Defining the output screen
 		GridPane outputGrid = new GridPane();
+		ColumnConstraints columnO = new ColumnConstraints();
+		columnO.setPercentWidth(100);
+		outputGrid.getColumnConstraints().add(columnO);
 		ScrollPane spOut = new ScrollPane();
 		GridPane outGrid2 = new GridPane();
 		Scene output = new Scene(outputGrid, 800, 600, Color.IVORY);
 		spOut.setContent(outGrid2);
-		spOut.setPrefSize(700, 600);
+		spOut.setPrefSize(700, input.getWidth());
 		//Input objects
 		//Adding the TextFields
 		TextField ZIPCode = new TextField("ZIP");
@@ -133,6 +137,21 @@ public class JavaFXMain extends Application {
 							if(searcher.getResults()[i] != null){
 								String storeName = searcher.getResults()[i].name; 
 								GridPane tgrid = new GridPane();
+								tgrid.setHgap(15);
+								ColumnConstraints column1 = new ColumnConstraints();
+								column1.setPercentWidth(10);
+								ColumnConstraints column2 = new ColumnConstraints();
+								column2.setPercentWidth(75);
+								ColumnConstraints column3 = new ColumnConstraints();
+								column3.setPercentWidth(8);
+								ColumnConstraints column4 = new ColumnConstraints();
+								column4.setPercentWidth(7);
+								
+								tgrid.getColumnConstraints().add(column1);
+								tgrid.getColumnConstraints().add(column2);
+								tgrid.getColumnConstraints().add(column3);
+								tgrid.getColumnConstraints().add(column4);
+								
 								ImageView l;
 								Text hours;
 								Text fee;
@@ -172,9 +191,11 @@ public class JavaFXMain extends Application {
 								t.setFont(new Font(20));
 								tgrid.add(l, 0, 0);
 								//tgrid.add(b, 1, 0);
-								tgrid.add(t, 2, 0);
-								tgrid.add(hours, 3, 0);
-								tgrid.add(fee, 4, 0);
+								tgrid.add(t, 1, 0);
+								hours.setTextAlignment(TextAlignment.CENTER);
+								tgrid.add(hours, 2, 0);
+								fee.setTextAlignment(TextAlignment.CENTER);
+								tgrid.add(fee, 3, 0);
 								outGrid2.add(tgrid, 0, i);
 							}
 						}
@@ -195,9 +216,36 @@ public class JavaFXMain extends Application {
 				primaryStage.setScene(input);
 				outGrid2.getChildren().clear();
 			}
-		});
+		}
+		);
+		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		GridPane title = new GridPane();
+		Text log = new Text("");
+		Text add = new Text("Address");
+		Text hour = new Text("Hours");
+		Text fee = new Text("Fee");
+		title.setHgap(15);
+		ColumnConstraints column1 = new ColumnConstraints();
+		column1.setPercentWidth(10);
+		ColumnConstraints column2 = new ColumnConstraints();
+		column2.setPercentWidth(75);
+		ColumnConstraints column3 = new ColumnConstraints();
+		column3.setPercentWidth(8);
+		ColumnConstraints column4 = new ColumnConstraints();
+		column4.setPercentWidth(7);
+		
+		title.getColumnConstraints().add(column1);
+		title.getColumnConstraints().add(column2);
+		title.getColumnConstraints().add(column3);
+		title.getColumnConstraints().add(column4);
+		title.add(log, 0, 0);
+		title.add(add, 1, 0);
+		title.add(hour, 2, 0);
+		title.add(fee, 3, 0);
+		// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		outputGrid.add(back, 0, 0);
-		outputGrid.add(spOut, 0, 1);
+		outputGrid.add(title, 0, 1);
+		outputGrid.add(spOut, 0, 2);
 		/*for(int i = 0; i <= 500; i++){
 			Text t = new Text(10, 50, "42 Walloby Way, Melbourne, Sydney\n");
 			t.setFont(new Font(20));
